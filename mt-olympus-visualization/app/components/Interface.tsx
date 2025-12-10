@@ -11,6 +11,7 @@ interface InterfaceProps {
 
 export default function Interface({ selectedGod, onCloseSelection }: InterfaceProps) {
     const [showCommentary, setShowCommentary] = useState(false);
+    const [showBibliography, setShowBibliography] = useState(false);
 
     // Helper to find god name by ID
     const getGodName = (id: string) => gods.find(g => g.id === id)?.name || id;
@@ -33,14 +34,24 @@ export default function Interface({ selectedGod, onCloseSelection }: InterfacePr
                     </p>
                 </motion.div>
 
-                <motion.button
+                <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    onClick={() => setShowCommentary(true)}
-                    className="px-4 py-2 rounded-full border border-amber-500/30 bg-black/40 text-amber-100 hover:bg-amber-900/30 transition-colors backdrop-blur-sm font-cinzel text-sm"
+                    className="flex flex-col gap-2"
                 >
-                    Project Commentary
-                </motion.button>
+                    <button
+                        onClick={() => setShowCommentary(true)}
+                        className="px-6 py-2 border border-amber-500/50 text-amber-100 rounded-full hover:bg-amber-900/30 transition-all font-serif text-sm backdrop-blur-sm"
+                    >
+                        Project Commentary
+                    </button>
+                    <button
+                        onClick={() => setShowBibliography(true)}
+                        className="px-6 py-2 border border-amber-500/50 text-amber-100 rounded-full hover:bg-amber-900/30 transition-all font-serif text-sm backdrop-blur-sm"
+                    >
+                        MLA Bibliography
+                    </button>
+                </motion.div>
             </header>
 
             {/* Main Content Area - Left empty for 3D view center */}
@@ -109,6 +120,11 @@ export default function Interface({ selectedGod, onCloseSelection }: InterfacePr
                             {/* Source Quote */}
                             <div className="border-l-2 border-amber-500/50 pl-4 py-1 italic text-gray-400 text-sm">
                                 "{selectedGod.quote}"
+                                {selectedGod.quoteSource && (
+                                    <div className="block mt-1 text-[10px] not-italic text-amber-500/60 uppercase tracking-widest text-right">
+                                        — {selectedGod.quoteSource}
+                                    </div>
+                                )}
                                 <div className="text-amber-500/80 text-xs not-italic mt-2 font-semibold">
                                     — Primary Source: {selectedGod.primarySource}
                                 </div>
@@ -193,6 +209,50 @@ export default function Interface({ selectedGod, onCloseSelection }: InterfacePr
                                 </p>
                                 <p className="text-sm italic text-gray-500 mt-8 border-t border-gray-800 pt-4">
                                     Sources: Hesiod's Theogony, Homer's Iliad & Odyssey, Homeric Hymns.
+                                </p>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+
+            </AnimatePresence>
+
+            {/* Bibliography Modal */}
+            <AnimatePresence>
+                {showBibliography && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="pointer-events-auto fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9, y: 20 }}
+                            animate={{ scale: 1, y: 0 }}
+                            exit={{ scale: 0.9, y: 20 }}
+                            className="bg-gray-900 border border-white/10 max-w-2xl w-full max-h-[80vh] overflow-y-auto rounded-2xl p-8 shadow-2xl relative"
+                        >
+                            <button
+                                onClick={() => setShowBibliography(false)}
+                                className="absolute top-4 right-4 text-gray-500 hover:text-white"
+                            >
+                                ✕
+                            </button>
+
+                            <h2 className="font-cinzel text-3xl text-amber-100 mb-6">Works Cited</h2>
+
+                            <div className="prose prose-invert prose-amber max-w-none text-gray-300 space-y-4 font-serif pl-8 indent-[-2rem]">
+                                <p>
+                                    Hesiod. <em>Theogony</em>.  Translated by Evelyn-White, H.G., Harvard University Press, 1914, https://www.theoi.com/Text/HomericHymns1.html.
+                                </p>
+                                <p>
+                                    The British Museum. “Gods and Goddesses of the Greek and Roman Pantheon.” The British Museum, 7 May 2021, www.britishmuseum.org/blog/gods-and-goddesses-greek-and-roman-pantheon.
+                                </p>
+                                <p>
+                                    Homer. <em>The Odyssey</em>. Translated by Ian Johnston, Vancouver Island University Press, 2002.
+                                </p>
+                                <p>
+                                    Anonymous Authors. <em>Homeric Hymns</em>. Translated by Evelyn-White, H.G., Harvard University Press, 1914, https://www.theoi.com/Text/HomericHymns1.html.
                                 </p>
                             </div>
                         </motion.div>

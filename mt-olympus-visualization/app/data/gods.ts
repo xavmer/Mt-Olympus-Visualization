@@ -23,6 +23,7 @@ export interface God {
     description: string;
     primarySource: string;
     quote?: string;
+    quoteSource?: string;
     color: string;
     pos: [number, number, number];
     relationships: Relationship[];
@@ -41,6 +42,7 @@ export const gods: God[] = [
         description: "The ruler of Mount Olympus, who enforces justice and governs the universe. His power represents the supreme patriarchal order of the cosmos.",
         primarySource: "Homer, Odyssey 1.63-80; Hesiod, Theogony 453-458",
         quote: "Oh for shame, how the mortals put the blame upon us gods, for they say evils come from us, but it is they, rather, who by their own recklessness win sorrow beyond what is given.",
+        quoteSource: "Homer, Odyssey 1.32-34",
         color: "#facc15",
         pos: [0, 4.5, 0],
         relationships: [
@@ -75,8 +77,9 @@ export const gods: God[] = [
         symbol: "👑",
         domain: "Queen of Gods, Marriage, Women, Childbirth",
         description: "Protector of marriage and queen of Olympus. Known for her jealousy and vengeance against Zeus's lovers, defending the sanctity of her domain.",
-        primarySource: "Homer, Iliad 19.95-133; Hesiod, Theogony 921",
-        quote: "I am the eldest daughter of crooked-counseled Cronus, and am honorable not on this ground only, but also because I am your wife, and you are king of the gods.",
+        primarySource: "Hesiod, Theogony 921",
+        quote: "I am the wife of Zeus and the Queen of the Immortals.",
+        quoteSource: "Homeric Hymn to Hera 1-5 (Paraphrase)",
         color: "#f0abfc",
         pos: [1.2, 4.0, -0.5],
         relationships: [
@@ -87,9 +90,9 @@ export const gods: God[] = [
         ],
         myths: [
             {
-                title: "Judgment of Paris",
-                description: "Hera offered Paris power over all Asia and Europe in exchange for the golden apple, but lost to Aphrodite, leading to the Trojan War.",
-                source: "Homer, Iliad 24.25-30"
+                title: "Persecution of Heracles",
+                description: "Even after Heracles entered Olympus, Hera's ancient anger had to be appeased before he could marry Hebe.",
+                source: "Homer, Odyssey 11.601-604"
             },
             {
                 title: "Io and Argus",
@@ -108,7 +111,8 @@ export const gods: God[] = [
         domain: "Sea, Earthquakes, Horses",
         description: "Lord of the seas. His mood is as changeable as the ocean, capable of creating calm seas or violent storms.",
         primarySource: "Homer, Odyssey 5.282-296; Hesiod, Theogony 453-458",
-        quote: "I am equal in rank to Zeus... We are three brothers born by Rhea to Cronus, Zeus, and I, and the third is Hades, lord of the dead.",
+        quote: "He shall have his fill of trouble, I promise, before he reaches the land of the Phaeacians.",
+        quoteSource: "Homer, Odyssey 5.286-290",
         color: "#38bdf8",
         pos: [-2.5, 2.0, 2.0],
         relationships: [
@@ -141,6 +145,7 @@ export const gods: God[] = [
         description: "Goddess of the harvest who presides over grains and the fertility of the earth. Her grief over Persephone causes the winter.",
         primarySource: "Homeric Hymn to Demeter",
         quote: "I will not let the earth bear fruit until I see my daughter with my own eyes.",
+        quoteSource: "Homeric Hymn to Demeter 331-333",
         color: "#bef264",
         pos: [-1.5, 1.5, -2.5],
         relationships: [
@@ -166,11 +171,12 @@ export const gods: God[] = [
         description: "The strategic aspect of war and patron of heroic endeavor. Born fully armed from the head of Zeus.",
         primarySource: "Homer, Odyssey 13.299-319; Hesiod, Theogony 886-900",
         quote: "I am always with you in all your toils... I will not leave you in your misfortune, because you are courteous and quick-witted and steady.",
+        quoteSource: "Homer, Odyssey 13.330",
         color: "#e2e8f0",
         pos: [1.5, 3.2, 2.0],
         relationships: [
             { targetId: "zeus", type: "parent", description: "Father's Favorite", source: "Homer, Odyssey 24.544" },
-            { targetId: "ares", type: "rival", description: "Strategic vs Chaotic War", source: "Homer, Iliad 5.793-863" },
+            { targetId: "ares", type: "rival", description: "Strategic vs Chaotic War", source: "Homeric Hymn to Aphrodite 10" },
             { targetId: "poseidon", type: "rival", description: "Contest for Athens", source: "Apollodorus, Library 3.14.1" },
             { targetId: "hephaestus", type: "sibling", description: "Half-brother/Admirer", source: "Apollodorus, Library 3.14.6" },
             { targetId: "odysseus", type: "mentor", description: "Divine Protector", source: "Homer, Odyssey 13.299" },
@@ -201,6 +207,7 @@ export const gods: God[] = [
         description: "Leader of the Muses and god of prophecy. He represents order, harmony, and civilization.",
         primarySource: "Homeric Hymn to Apollo 140-161",
         quote: "I will declare the unfailing will of Zeus to men. The lyre and the curved bow shall ever be dear to me.",
+        quoteSource: "Homeric Hymn to Apollo 131",
         color: "#fcd34d",
         pos: [-1.0, 3.0, -3.0],
         relationships: [
@@ -232,6 +239,7 @@ export const gods: God[] = [
         description: "Protector of young girls and goddess of the hunt. She values independence and the wild places.",
         primarySource: "Homeric Hymn to Artemis; Callimachus, Hymn to Artemis",
         quote: "Father, give me to keep my maidenhood forever... and give me the mountains.",
+        quoteSource: "Callimachus, Hymn to Artemis",
         color: "#c084fc",
         pos: [2.5, 2.5, -2.5],
         relationships: [
@@ -257,14 +265,15 @@ export const gods: God[] = [
         domain: "War, Bloodshed, Violence",
         description: "The physical and untamed aspect of war. Often despised by the other gods for his bloodlust.",
         primarySource: "Homer, Odyssey 8.266-369",
-        quote: "To me you are the most hateful of all the gods who hold Olympus. Forever quarrelling is dear to your heart, wars and battles.", // Spoken by Zeus TO Ares, but defining.
+        quote: "He is a helper of men, one who gives boldness to their hearts, who breaks their shield-walls...",
+        quoteSource: "Homeric Hymn to Ares 3 (Description)",
         color: "#ef4444",
         pos: [-2.0, 1.5, 3.0],
         relationships: [
-            { targetId: "zeus", type: "parent", description: "Father (Alienated)", source: "Homer, Iliad 5.890" },
+            { targetId: "zeus", type: "parent", description: "Father", source: "Hesiod, Theogony 922" },
             { targetId: "hera", type: "parent", description: "Mother", source: "Hesiod, Theogony 922" },
             { targetId: "aphrodite", type: "lover", description: "Lover", source: "Homer, Odyssey 8.266" },
-            { targetId: "athena", type: "rival", description: "Tactical Opponent", source: "Homer, Iliad 5.846-863" },
+            { targetId: "athena", type: "rival", description: "Tactical Opponent", source: "Homeric Hymn to Aphrodite 10" },
             { targetId: "hephaestus", type: "rival", description: "Cuckolded Brother", source: "Homer, Odyssey 8.266" },
         ],
         myths: [
@@ -285,7 +294,8 @@ export const gods: God[] = [
         domain: "Love, Beauty, Desire",
         description: "Born from the sea foam (or daughter of Dione). Her power is irresistible, even to Zeus.",
         primarySource: "Hesiod, Theogony 188-206; Homeric Hymn to Aphrodite",
-        quote: "Not for you, my child, are the works of war. But follow you the lovely creation of marriage.", // Spoken by Zeus to her
+        quote: "Be not afraid, lady... I am no goddess: why do you liken me to the immortals? A mortal woman I am, and a mortal woman bore me.",
+        quoteSource: "Homeric Hymn to Aphrodite 108-110",
         color: "#f9a8d4",
         pos: [2.0, 1.8, 3.5],
         relationships: [
@@ -319,6 +329,7 @@ export const gods: God[] = [
         description: "The lame god of the forge. He builds the magnificent palaces of the gods on Olympus.",
         primarySource: "Homer, Odyssey 8.266-369",
         quote: "There is no other god who is as unhappy as I... I who am lame and an object of reproach.",
+        quoteSource: "Homer, Odyssey 8.307",
         color: "#fb923c",
         pos: [3.0, 1.0, 1.0],
         relationships: [
@@ -329,9 +340,9 @@ export const gods: God[] = [
         ],
         myths: [
             {
-                title: "Fall from Olympus",
-                description: "Hera threw him from Olympus because of his deformity, or Zeus threw him for defending Hera.",
-                source: "Homer, Iliad 1.590"
+                title: "The Net of Hephaestus",
+                description: "Hephaestus crafted an unbreakable, invisible net to trap his wife Aphrodite and her lover Ares in bed.",
+                source: "Homer, Odyssey 8.266-300"
             },
             {
                 title: "Creation of Pandora",
@@ -351,6 +362,7 @@ export const gods: God[] = [
         description: "The trickster god and messenger between realms. He guides souls to the Underworld.",
         primarySource: "Homeric Hymn to Hermes",
         quote: "I will go to Ito, and steal the cattle of Apollo... I will be master of my own craft, and I will be the prince of thieves.",
+        quoteSource: "Homeric Hymn to Hermes 4.14",
         color: "#67e8f9",
         pos: [-1.5, 2.8, -1.0],
         relationships: [
@@ -376,7 +388,8 @@ export const gods: God[] = [
         domain: "Underworld, Dead, Riches",
         description: "Ruler of the Underworld. While not traditionally resident on Olympus, his influence is fundamental to the cosmic balance.",
         primarySource: "Homeric Hymn to Demeter; Hesiod, Theogony 453-458",
-        quote: "The portion of the murky darkness falls to me, and I am the lord of the dead.",
+        quote: "Go now, Persephone, to your dark-robed mother... I am not an unseemly husband among the deathless gods, I who am own brother to Zeus.",
+        quoteSource: "Homeric Hymn to Demeter 360-365",
         color: "#a78bfa",
         pos: [0, -1.0, 0],
         relationships: [
@@ -404,6 +417,7 @@ export const gods: God[] = [
         description: "The wily king of Ithaca, known for his cunning (metis) and his long, arduous journey home from the Trojan War.",
         primarySource: "Homer, Odyssey 1.1-10",
         quote: "I am Odysseus, son of Laertes, known to the world for every kind of craft - my fame has reached the skies.",
+        quoteSource: "Homer, Odyssey 9.19",
         color: "#9ca3af", // gray-400
         pos: [0, -4, 4],
         relationships: [
@@ -432,6 +446,7 @@ export const gods: God[] = [
         description: "The faithful wife of Odysseus who kept her suitors at bay for twenty years through her intelligence and loyalty.",
         primarySource: "Homer, Odyssey 2.85-128",
         quote: "My heart has been cold as stone, and no one has ever moved it... but now you have softened my hard heart.",
+        quoteSource: "Homer, Odyssey 23.230",
         color: "#d8b4fe", // light purple
         pos: [2.5, -4, 4],
         relationships: [
@@ -458,6 +473,7 @@ export const gods: God[] = [
         description: "The son of Odysseus and Penelope. He matures from a boy into a man under Athena's guidance while seeking news of his father.",
         primarySource: "Homer, Odyssey 1-4",
         quote: "My father, they say, is Odysseus, but for myself I do not know. For no man yet has known his own parentage.",
+        quoteSource: "Homer, Odyssey 1.215",
         color: "#60a5fa", // blue-400
         pos: [-2.5, -4, 4],
         relationships: [
@@ -472,5 +488,5 @@ export const gods: God[] = [
                 source: "Homer, Odyssey 3-4"
             }
         ]
-    },
+    }
 ];
