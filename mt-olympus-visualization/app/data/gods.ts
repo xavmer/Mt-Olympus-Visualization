@@ -1,8 +1,15 @@
 
 export interface Relationship {
     targetId: string;
-    type: "sibling" | "spouse" | "child" | "parent" | "lover" | "rival";
+    type: "sibling" | "spouse" | "child" | "parent" | "lover" | "rival" | "creator" | "mentor" | "nemesis" | "helper";
     description: string;
+    source: string;
+}
+
+export interface Myth {
+    title: string;
+    description: string;
+    source: string;
 }
 
 export interface God {
@@ -10,14 +17,16 @@ export interface God {
     name: string;
     greekName: string;
     romanName: string;
+    role: "god" | "hero";
     symbol: string;
     domain: string;
     description: string;
     primarySource: string;
     quote?: string;
     color: string;
-    pos: [number, number, number]; // x, y, z coordinates in 3D space relative to Olympus peak
+    pos: [number, number, number];
     relationships: Relationship[];
+    myths: Myth[];
 }
 
 export const gods: God[] = [
@@ -26,195 +35,442 @@ export const gods: God[] = [
         name: "Zeus",
         greekName: "Zeus (Ζεύς)",
         romanName: "Jupiter",
+        role: "god",
         symbol: "⚡",
         domain: "King of Gods, Sky, Thunder, Law",
         description: "The ruler of Mount Olympus, who enforces justice and governs the universe. His power represents the supreme patriarchal order of the cosmos.",
-        primarySource: "Hesiod, Theogony 453-458; Homer, Iliad 1.503-530",
-        quote: "Sing, goddess, the anger of Peleus' son Achilleus... and the plan of Zeus was accomplished.",
-        color: "#facc15", // yellow-400
+        primarySource: "Homer, Odyssey 1.63-80; Hesiod, Theogony 453-458",
+        quote: "Oh for shame, how the mortals put the blame upon us gods, for they say evils come from us, but it is they, rather, who by their own recklessness win sorrow beyond what is given.",
+        color: "#facc15",
         pos: [0, 4.5, 0],
         relationships: [
-            { targetId: "hera", type: "spouse", description: "Sister and Wife" },
-            { targetId: "poseidon", type: "sibling", description: "Brother" },
-            { targetId: "hades", type: "sibling", description: "Brother" },
-            { targetId: "athena", type: "child", description: "Daughter (born from head)" },
-            { targetId: "ares", type: "child", description: "Son" },
+            { targetId: "hera", type: "spouse", description: "Sister & Wife", source: "Hesiod, Theogony 921" },
+            { targetId: "poseidon", type: "sibling", description: "Brother", source: "Hesiod, Theogony 453-458" },
+            { targetId: "hades", type: "sibling", description: "Brother", source: "Hesiod, Theogony 453-458" },
+            { targetId: "athena", type: "child", description: "Daughter (born from head)", source: "Hesiod, Theogony 886-900" },
+            { targetId: "ares", type: "child", description: "Son", source: "Hesiod, Theogony 922" },
+            { targetId: "apollo", type: "child", description: "Son (with Leto)", source: "Hesiod, Theogony 918" },
+            { targetId: "hermes", type: "child", description: "Son (with Maia)", source: "Hesiod, Theogony 938" },
+            { targetId: "odysseus", type: "parent", description: "Divine Ancestor (via Arcesius)", source: "Ovid, Metamorphoses 13.144" },
         ],
+        myths: [
+            {
+                title: "The Titanomachy",
+                description: "Zeus led his siblings in a ten-year war against their father Cronus and the Titans, eventually casting them into Tartarus and establishing the Olympian order.",
+                source: "Hesiod, Theogony 617-735"
+            },
+            {
+                title: "Prometheus and the Fire",
+                description: "When Prometheus stole fire for humanity, Zeus punished him by chaining him to a rock where an eagle ate his liver daily.",
+                source: "Aeschylus, Prometheus Bound"
+            }
+        ]
     },
     {
         id: "hera",
         name: "Hera",
         greekName: "Hera (Ἥρα)",
         romanName: "Juno",
+        role: "god",
         symbol: "👑",
         domain: "Queen of Gods, Marriage, Women, Childbirth",
         description: "Protector of marriage and queen of Olympus. Known for her jealousy and vengeance against Zeus's lovers, defending the sanctity of her domain.",
-        primarySource: "Homer, Iliad 14.153-353; Hesiod, Theogony 921",
-        color: "#f0abfc", // fuchsia-300
+        primarySource: "Homer, Iliad 19.95-133; Hesiod, Theogony 921",
+        quote: "I am the eldest daughter of crooked-counseled Cronus, and am honorable not on this ground only, but also because I am your wife, and you are king of the gods.",
+        color: "#f0abfc",
         pos: [1.2, 4.0, -0.5],
         relationships: [
-            { targetId: "zeus", type: "spouse", description: "Husband and Brother" },
-            { targetId: "ares", type: "child", description: "Son" },
-            { targetId: "hephaestus", type: "child", description: "Son" },
+            { targetId: "zeus", type: "spouse", description: "Husband & Brother", source: "Hesiod, Theogony 921" },
+            { targetId: "ares", type: "child", description: "Son", source: "Hesiod, Theogony 922" },
+            { targetId: "hephaestus", type: "child", description: "Son", source: "Hesiod, Theogony 927" },
+            { targetId: "hercules", type: "rival", description: "Persecutor of Heracles", source: "Homer, Odyssey 11.601" },
         ],
+        myths: [
+            {
+                title: "Judgment of Paris",
+                description: "Hera offered Paris power over all Asia and Europe in exchange for the golden apple, but lost to Aphrodite, leading to the Trojan War.",
+                source: "Homer, Iliad 24.25-30"
+            },
+            {
+                title: "Io and Argus",
+                description: "She turned Io (Zeus's lover) into a cow and set the hundred-eyed Argus to watch her.",
+                source: "Ovid, Metamorphoses 1.625"
+            }
+        ]
     },
     {
         id: "poseidon",
         name: "Poseidon",
         greekName: "Poseidon (Ποσειδῶν)",
         romanName: "Neptune",
+        role: "god",
         symbol: "🌊",
         domain: "Sea, Earthquakes, Horses",
         description: "Lord of the seas. His mood is as changeable as the ocean, capable of creating calm seas or violent storms.",
         primarySource: "Homer, Odyssey 5.282-296; Hesiod, Theogony 453-458",
-        color: "#38bdf8", // sky-400
+        quote: "I am equal in rank to Zeus... We are three brothers born by Rhea to Cronus, Zeus, and I, and the third is Hades, lord of the dead.",
+        color: "#38bdf8",
         pos: [-2.5, 2.0, 2.0],
         relationships: [
-            { targetId: "zeus", type: "sibling", description: "Brother" },
-            { targetId: "hades", type: "sibling", description: "Brother" },
+            { targetId: "zeus", type: "sibling", description: "Brother", source: "Hesiod, Theogony 453-458" },
+            { targetId: "hades", type: "sibling", description: "Brother", source: "Hesiod, Theogony 453-458" },
+            { targetId: "athena", type: "rival", description: "Contest for Athens", source: "Apollodorus, Library 3.14.1" },
+            { targetId: "odysseus", type: "nemesis", description: "Divine Nemesis", source: "Homer, Odyssey 1.68-75" },
         ],
+        myths: [
+            {
+                title: "Contest for Athens",
+                description: "Poseidon struck the Acropolis with his trident to create a salt spring, losing the patronage of the city to Athena's olive tree.",
+                source: "Apollodorus, Library 3.14.1"
+            },
+            {
+                title: "Odysseus's Curse",
+                description: "Because Odysseus blinded his son Polyphemus, Poseidon delayed the hero's return home by ten years.",
+                source: "Homer, Odyssey 5.282-381"
+            }
+        ]
     },
     {
         id: "demeter",
         name: "Demeter",
         greekName: "Demeter (Δημήτηρ)",
         romanName: "Ceres",
+        role: "god",
         symbol: "🌾",
         domain: "Agriculture, Harvest, Sacred Law",
         description: "Goddess of the harvest who presides over grains and the fertility of the earth. Her grief over Persephone causes the winter.",
         primarySource: "Homeric Hymn to Demeter",
-        color: "#bef264", // lime-300
+        quote: "I will not let the earth bear fruit until I see my daughter with my own eyes.",
+        color: "#bef264",
         pos: [-1.5, 1.5, -2.5],
         relationships: [
-            { targetId: "zeus", type: "sibling", description: "Sister & Mother of Persephone" },
+            { targetId: "zeus", type: "sibling", description: "Sister & Mother of Persephone", source: "Hesiod, Theogony 912" },
+            { targetId: "hades", type: "rival", description: "Abductor of her daughter", source: "Homeric Hymn to Demeter 1-89" },
         ],
+        myths: [
+            {
+                title: "Abduction of Persephone",
+                description: "When Hades stole her daughter, Demeter let the earth go barren until a compromise was reached, creating the seasons.",
+                source: "Homeric Hymn to Demeter"
+            }
+        ]
     },
     {
         id: "athena",
         name: "Athena",
         greekName: "Athena (Ἀθηνᾶ)",
         romanName: "Minerva",
+        role: "god",
         symbol: "🦉",
         domain: "Wisdom, Handicraft, Warfare",
         description: "The strategic aspect of war and patron of heroic endeavor. Born fully armed from the head of Zeus.",
-        primarySource: "Hesiod, Theogony 886-900; Homer, Iliad 5.733-747",
-        color: "#e2e8f0", // slate-200 (silver/grey for wisdom/armor)
+        primarySource: "Homer, Odyssey 13.299-319; Hesiod, Theogony 886-900",
+        quote: "I am always with you in all your toils... I will not leave you in your misfortune, because you are courteous and quick-witted and steady.",
+        color: "#e2e8f0",
         pos: [1.5, 3.2, 2.0],
         relationships: [
-            { targetId: "zeus", type: "parent", description: "Father" },
-            { targetId: "ares", type: "rival", description: "Strategic vs Chaotic War" },
+            { targetId: "zeus", type: "parent", description: "Father's Favorite", source: "Homer, Odyssey 24.544" },
+            { targetId: "ares", type: "rival", description: "Strategic vs Chaotic War", source: "Homer, Iliad 5.793-863" },
+            { targetId: "poseidon", type: "rival", description: "Contest for Athens", source: "Apollodorus, Library 3.14.1" },
+            { targetId: "hephaestus", type: "sibling", description: "Half-brother/Admirer", source: "Apollodorus, Library 3.14.6" },
+            { targetId: "odysseus", type: "mentor", description: "Divine Protector", source: "Homer, Odyssey 13.299" },
+            { targetId: "telemachus", type: "mentor", description: "Guide (as Mentor)", source: "Homer, Odyssey 2-4" },
+            { targetId: "penelope", type: "helper", description: "Inspirer of Dreams", source: "Homer, Odyssey 4.795" },
         ],
+        myths: [
+            {
+                title: "Birth from Zeus",
+                description: "Metis was swallowed by Zeus, and Athena later sprang from his head fully armored.",
+                source: "Hesiod, Theogony 886-900"
+            },
+            {
+                title: "Athena and Odysseus",
+                description: "She guided Odysseus throughout his journeys, appearing in disguise to offer wisdom and strategy for his return.",
+                source: "Homer, Odyssey 13"
+            }
+        ]
     },
     {
         id: "apollo",
         name: "Apollo",
         greekName: "Apollo (Ἀπόλλων)",
         romanName: "Apollo",
+        role: "god",
         symbol: "🌞",
         domain: "Sun, Light, Oracles, Music, Healing",
         description: "Leader of the Muses and god of prophecy. He represents order, harmony, and civilization.",
-        primarySource: "Homeric Hymn to Apollo",
-        color: "#fcd34d", // amber-300
+        primarySource: "Homeric Hymn to Apollo 140-161",
+        quote: "I will declare the unfailing will of Zeus to men. The lyre and the curved bow shall ever be dear to me.",
+        color: "#fcd34d",
         pos: [-1.0, 3.0, -3.0],
         relationships: [
-            { targetId: "zeus", type: "parent", description: "Father" },
-            { targetId: "artemis", type: "sibling", description: "Twin Sister" },
+            { targetId: "zeus", type: "parent", description: "Father", source: "Hesiod, Theogony 918" },
+            { targetId: "artemis", type: "sibling", description: "Twin Sister", source: "Hesiod, Theogony 918" },
+            { targetId: "hermes", type: "sibling", description: "Half-brother/Rival", source: "Homeric Hymn to Hermes" },
         ],
+        myths: [
+            {
+                title: "Slaying of Python",
+                description: "Apollo killed the serpent Python at Delphi to establish his oracle.",
+                source: "Homeric Hymn to Apollo"
+            },
+            {
+                title: "Daphne",
+                description: "Struck by Cupid's arrow, he chased the nymph Daphne until she transformed into a laurel tree to escape him.",
+                source: "Ovid, Metamorphoses 1.452"
+            }
+        ]
     },
     {
         id: "artemis",
         name: "Artemis",
         greekName: "Artemis (Ἄρτεμις)",
         romanName: "Diana",
+        role: "god",
         symbol: "🏹",
         domain: "Hunt, Wilderness, Moon, Archery",
         description: "Protector of young girls and goddess of the hunt. She values independence and the wild places.",
         primarySource: "Homeric Hymn to Artemis; Callimachus, Hymn to Artemis",
-        color: "#c084fc", // purple-400 (moon/night vibe)
+        quote: "Father, give me to keep my maidenhood forever... and give me the mountains.",
+        color: "#c084fc",
         pos: [2.5, 2.5, -2.5],
         relationships: [
-            { targetId: "zeus", type: "parent", description: "Father" },
-            { targetId: "apollo", type: "sibling", description: "Twin Brother" },
+            { targetId: "zeus", type: "parent", description: "Father", source: "Hesiod, Theogony 918" },
+            { targetId: "apollo", type: "sibling", description: "Twin Brother", source: "Hesiod, Theogony 918" },
+            { targetId: "aphrodite", type: "rival", description: "Chastity vs Lust", source: "Euripides, Hippolytus" },
         ],
+        myths: [
+            {
+                title: "Acteon",
+                description: "When the hunter Acteon saw her bathing, she turned him into a stag and he was devoured by his own hounds.",
+                source: "Ovid, Metamorphoses 3.138"
+            }
+        ]
     },
     {
         id: "ares",
         name: "Ares",
         greekName: "Ares (Ἄρης)",
         romanName: "Mars",
+        role: "god",
         symbol: "⚔️",
         domain: "War, Bloodshed, Violence",
         description: "The physical and untamed aspect of war. Often despised by the other gods for his bloodlust.",
-        primarySource: "Homer, Iliad 5.890-898",
-        color: "#ef4444", // red-500
+        primarySource: "Homer, Odyssey 8.266-369",
+        quote: "To me you are the most hateful of all the gods who hold Olympus. Forever quarrelling is dear to your heart, wars and battles.", // Spoken by Zeus TO Ares, but defining.
+        color: "#ef4444",
         pos: [-2.0, 1.5, 3.0],
         relationships: [
-            { targetId: "zeus", type: "parent", description: "Father" },
-            { targetId: "hera", type: "parent", description: "Mother" },
-            { targetId: "aphrodite", type: "lover", description: "Lover" },
+            { targetId: "zeus", type: "parent", description: "Father (Alienated)", source: "Homer, Iliad 5.890" },
+            { targetId: "hera", type: "parent", description: "Mother", source: "Hesiod, Theogony 922" },
+            { targetId: "aphrodite", type: "lover", description: "Lover", source: "Homer, Odyssey 8.266" },
+            { targetId: "athena", type: "rival", description: "Tactical Opponent", source: "Homer, Iliad 5.846-863" },
+            { targetId: "hephaestus", type: "rival", description: "Cuckolded Brother", source: "Homer, Odyssey 8.266" },
         ],
+        myths: [
+            {
+                title: "The Net of Hephaestus",
+                description: "Ares was trapped in an invisible bronze net while in bed with Aphrodite, exposing them to the ridicule of the gods.",
+                source: "Homer, Odyssey 8.266"
+            }
+        ]
     },
     {
         id: "aphrodite",
         name: "Aphrodite",
         greekName: "Aphrodite (Ἀφροδίτη)",
         romanName: "Venus",
+        role: "god",
         symbol: "🌹",
         domain: "Love, Beauty, Desire",
         description: "Born from the sea foam (or daughter of Dione). Her power is irresistible, even to Zeus.",
         primarySource: "Hesiod, Theogony 188-206; Homeric Hymn to Aphrodite",
-        color: "#f9a8d4", // pink-300
+        quote: "Not for you, my child, are the works of war. But follow you the lovely creation of marriage.", // Spoken by Zeus to her
+        color: "#f9a8d4",
         pos: [2.0, 1.8, 3.5],
         relationships: [
-            { targetId: "hephaestus", type: "spouse", description: "Husband" },
-            { targetId: "ares", type: "lover", description: "Lover" },
+            { targetId: "hephaestus", type: "spouse", description: "Husband", source: "Homer, Odyssey 8.266" },
+            { targetId: "ares", type: "lover", description: "Lover", source: "Homer, Odyssey 8.266" },
+            { targetId: "artemis", type: "rival", description: "Opposite Ideals", source: "Euripides, Hippolytus" },
+            { targetId: "athena", type: "rival", description: "Judgment of Paris", source: "Cypria (Lost Epic)" },
+            { targetId: "hera", type: "rival", description: "Judgment of Paris", source: "Cypria (Lost Epic)" },
         ],
+        myths: [
+            {
+                title: "Birth from the Sea",
+                description: "She rose from the sea foam near Cyprus after Cronus severed Uranus's genitals.",
+                source: "Hesiod, Theogony 188-206"
+            },
+            {
+                title: "Judgment of Paris",
+                description: "She won the golden apple by promising Paris the most beautiful woman in the world (Helen), sparking the Trojan War.",
+                source: "Cypria (Lost Epic)"
+            }
+        ]
     },
     {
         id: "hephaestus",
         name: "Hephaestus",
         greekName: "Hephaestus (Ἥφαιστος)",
         romanName: "Vulcan",
+        role: "god",
         symbol: "🔥",
         domain: "Blacksmiths, Craftsmen, Fire",
         description: "The lame god of the forge. He builds the magnificent palaces of the gods on Olympus.",
-        primarySource: "Homer, Iliad 18.368-617",
-        color: "#fb923c", // orange-400
+        primarySource: "Homer, Odyssey 8.266-369",
+        quote: "There is no other god who is as unhappy as I... I who am lame and an object of reproach.",
+        color: "#fb923c",
         pos: [3.0, 1.0, 1.0],
         relationships: [
-            { targetId: "hera", type: "parent", description: "Mother" },
-            { targetId: "aphrodite", type: "spouse", description: "Wife" },
+            { targetId: "hera", type: "parent", description: "Mother (who cast him out)", source: "Hesiod, Theogony 927" },
+            { targetId: "aphrodite", type: "spouse", description: "Wife", source: "Homer, Odyssey 8.266" },
+            { targetId: "ares", type: "rival", description: "Wife's Lover", source: "Homer, Odyssey 8.266" },
+            { targetId: "athena", type: "sibling", description: "Intellectual Peer", source: "Plato, Critias 109c" },
         ],
+        myths: [
+            {
+                title: "Fall from Olympus",
+                description: "Hera threw him from Olympus because of his deformity, or Zeus threw him for defending Hera.",
+                source: "Homer, Iliad 1.590"
+            },
+            {
+                title: "Creation of Pandora",
+                description: "He molded the first woman, Pandora, from clay at the order of Zeus.",
+                source: "Hesiod, Works and Days 60-105"
+            }
+        ]
     },
     {
         id: "hermes",
         name: "Hermes",
         greekName: "Hermes (Ἑρμῆς)",
         romanName: "Mercury",
+        role: "god",
         symbol: "🕊️",
         domain: "Messenger, Trade, Thieves, Travelers",
         description: "The trickster god and messenger between realms. He guides souls to the Underworld.",
         primarySource: "Homeric Hymn to Hermes",
-        color: "#67e8f9", // cyan-300
+        quote: "I will go to Ito, and steal the cattle of Apollo... I will be master of my own craft, and I will be the prince of thieves.",
+        color: "#67e8f9",
         pos: [-1.5, 2.8, -1.0],
         relationships: [
-            { targetId: "zeus", type: "parent", description: "Father" },
+            { targetId: "zeus", type: "parent", description: "Father", source: "Hesiod, Theogony 938" },
+            { targetId: "apollo", type: "sibling", description: "Cattle Thief/Lyre Gift", source: "Homeric Hymn to Hermes" },
+            { targetId: "odysseus", type: "helper", description: "Argus-Slayer/Guide", source: "Homer, Odyssey 10.277" },
         ],
+        myths: [
+            {
+                title: "Odysseus's Guide",
+                description: "Hermes gave Odysseus the moly plant to protect him from Circe's magic.",
+                source: "Homer, Odyssey 10.275-308"
+            }
+        ]
     },
     {
         id: "hades",
         name: "Hades",
         greekName: "Hades (Ἅιδης)",
         romanName: "Pluto",
+        role: "god",
         symbol: "💀",
         domain: "Underworld, Dead, Riches",
         description: "Ruler of the Underworld. While not traditionally resident on Olympus, his influence is fundamental to the cosmic balance.",
         primarySource: "Homeric Hymn to Demeter; Hesiod, Theogony 453-458",
-        color: "#a78bfa", // violet-400
-        pos: [0, -1.0, 0], // Below the others
+        quote: "The portion of the murky darkness falls to me, and I am the lord of the dead.",
+        color: "#a78bfa",
+        pos: [0, -1.0, 0],
         relationships: [
-            { targetId: "zeus", type: "sibling", description: "Brother" },
-            { targetId: "poseidon", type: "sibling", description: "Brother" },
+            { targetId: "zeus", type: "sibling", description: "Brother/Rival", source: "Hesiod, Theogony 453-458" },
+            { targetId: "poseidon", type: "sibling", description: "Brother", source: "Hesiod, Theogony 453-458" },
+            { targetId: "demeter", type: "rival", description: "Stole her daughter", source: "Homeric Hymn to Demeter" },
+            { targetId: "odysseus", type: "creator", description: "Allowed Entrance", source: "Homer, Odyssey 11" },
         ],
+        myths: [
+            {
+                title: "Odysseus in the Underworld",
+                description: "Odysseus traveled to the entrance of Hades to sacrifice and speak with the prophet Tiresias.",
+                source: "Homer, Odyssey 11"
+            }
+        ]
+    },
+    {
+        id: "odysseus",
+        name: "Odysseus",
+        greekName: "Odysseus (Ὀδυσσεύς)",
+        romanName: "Ulysses",
+        role: "hero",
+        symbol: "⛵",
+        domain: "King of Ithaca, Hero",
+        description: "The wily king of Ithaca, known for his cunning (metis) and his long, arduous journey home from the Trojan War.",
+        primarySource: "Homer, Odyssey 1.1-10",
+        quote: "I am Odysseus, son of Laertes, known to the world for every kind of craft - my fame has reached the skies.",
+        color: "#9ca3af", // gray-400
+        pos: [0, -4, 4],
+        relationships: [
+            { targetId: "athena", type: "mentor", description: "Divine Protector", source: "Homer, Odyssey 13" },
+            { targetId: "poseidon", type: "nemesis", description: "Divine Nemesis", source: "Homer, Odyssey 1" },
+            { targetId: "penelope", type: "spouse", description: "Wife", source: "Homer, Odyssey" },
+            { targetId: "telemachus", type: "child", description: "Son", source: "Homer, Odyssey 1" },
+            { targetId: "hermes", type: "helper", description: "Received Aid", source: "Homer, Odyssey 10" },
+        ],
+        myths: [
+            {
+                title: "The Cyclops Polyphemus",
+                description: "Odysseus blinded Poseidon's son Polyphemus to escape his cave, incurring the god's wrath.",
+                source: "Homer, Odyssey 9"
+            }
+        ]
+    },
+    {
+        id: "penelope",
+        name: "Penelope",
+        greekName: "Penelope (Πηνελόπη)",
+        romanName: "Penelope",
+        role: "hero",
+        symbol: "🧶",
+        domain: "Queen of Ithaca",
+        description: "The faithful wife of Odysseus who kept her suitors at bay for twenty years through her intelligence and loyalty.",
+        primarySource: "Homer, Odyssey 2.85-128",
+        quote: "My heart has been cold as stone, and no one has ever moved it... but now you have softened my hard heart.",
+        color: "#d8b4fe", // light purple
+        pos: [2.5, -4, 4],
+        relationships: [
+            { targetId: "odysseus", type: "spouse", description: "Husband", source: "Homer, Odyssey 23" },
+            { targetId: "telemachus", type: "child", description: "Son", source: "Homer, Odyssey 1" },
+            { targetId: "athena", type: "helper", description: "Received Dreams", source: "Homer, Odyssey 4" },
+        ],
+        myths: [
+            {
+                title: "The Shroud of Laertes",
+                description: "She promised to choose a suitor once she finished weaving a shroud for Laertes, but unraveled it every night.",
+                source: "Homer, Odyssey 2"
+            }
+        ]
+    },
+    {
+        id: "telemachus",
+        name: "Telemachus",
+        greekName: "Telemachus (Τηλέμαχος)",
+        romanName: "Telemachus",
+        role: "hero",
+        symbol: "🗡️",
+        domain: "Prince of Ithaca",
+        description: "The son of Odysseus and Penelope. He matures from a boy into a man under Athena's guidance while seeking news of his father.",
+        primarySource: "Homer, Odyssey 1-4",
+        quote: "My father, they say, is Odysseus, but for myself I do not know. For no man yet has known his own parentage.",
+        color: "#60a5fa", // blue-400
+        pos: [-2.5, -4, 4],
+        relationships: [
+            { targetId: "odysseus", type: "parent", description: "Father", source: "Homer, Odyssey 16" },
+            { targetId: "penelope", type: "parent", description: "Mother", source: "Homer, Odyssey 1" },
+            { targetId: "athena", type: "mentor", description: "Guide (Mentor)", source: "Homer, Odyssey 1-4" },
+        ],
+        myths: [
+            {
+                title: "Journey to Pylos and Sparta",
+                description: "inspired by Athena, he traveled to Pylos and Sparta to ask Nestor and Menelaus for news of his father.",
+                source: "Homer, Odyssey 3-4"
+            }
+        ]
     },
 ];

@@ -96,6 +96,9 @@ export default function Interface({ selectedGod, onCloseSelection }: InterfacePr
                                 <div className="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase border border-white/10 bg-white/5 text-amber-200">
                                     {selectedGod.domain}
                                 </div>
+                                <div className={`inline-block ml-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase border border-white/10 ${selectedGod.role === 'hero' ? 'bg-blue-500/20 text-blue-200' : 'bg-amber-500/20 text-amber-200'}`}>
+                                    {selectedGod.role}
+                                </div>
                             </div>
 
                             {/* Description */}
@@ -105,11 +108,12 @@ export default function Interface({ selectedGod, onCloseSelection }: InterfacePr
 
                             {/* Source Quote */}
                             <div className="border-l-2 border-amber-500/50 pl-4 py-1 italic text-gray-400 text-sm">
-                                "{selectedGod.quote || "Sing, goddess, of the anger of Peleus' son Achilleus..."}"
+                                "{selectedGod.quote}"
                                 <div className="text-amber-500/80 text-xs not-italic mt-2 font-semibold">
                                     — Primary Source: {selectedGod.primarySource}
                                 </div>
                             </div>
+
 
                             {/* Relationships */}
                             <div>
@@ -122,12 +126,29 @@ export default function Interface({ selectedGod, onCloseSelection }: InterfacePr
                                             />
                                             <div className="flex-1">
                                                 <span className="font-bold text-gray-200 block">{getGodName(rel.targetId)}</span>
-                                                <span className="text-xs text-gray-400 uppercase tracking-wide">{rel.description}</span>
+                                                <span className="text-xs text-gray-400 uppercase tracking-wide block">{rel.description}</span>
+                                                <span className="text-[10px] text-white/30 italic block mt-0.5">{rel.source}</span>
                                             </div>
                                         </div>
                                     ))}
                                 </div>
                             </div>
+
+                            {/* Major Myths */}
+                            {selectedGod.myths && selectedGod.myths.length > 0 && (
+                                <div>
+                                    <h3 className="font-cinzel text-xl text-white mb-4 border-b border-white/10 pb-2">Major Myths</h3>
+                                    <div className="space-y-4">
+                                        {selectedGod.myths.map((myth, idx) => (
+                                            <div key={idx} className="bg-white/5 p-4 rounded-lg border border-white/5">
+                                                <h4 className="font-bold text-amber-200 mb-1 font-cinzel">{myth.title}</h4>
+                                                <p className="text-sm text-gray-300 leading-relaxed mb-2">{myth.description}</p>
+                                                <div className="text-xs text-white/40 italic text-right">— {myth.source}</div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </motion.div>
                 )}
@@ -178,6 +199,6 @@ export default function Interface({ selectedGod, onCloseSelection }: InterfacePr
                     </motion.div>
                 )}
             </AnimatePresence>
-        </div>
+        </div >
     );
 }

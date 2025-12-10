@@ -128,8 +128,8 @@ export default function OlympusScene({ onSelectGod, selectedGod }: OlympusSceneP
                 />
 
                 {/* Stylized Olympus Peak */}
-                <mesh position={[0, 1.7, 0]} rotation={[0, 0, 0]}>
-                    <coneGeometry args={[3, 4, 8]} />
+                <mesh position={[0, 1.0, 0]} rotation={[0, 0, 0]}>
+                    <coneGeometry args={[4, 7, 8]} />
                     <meshStandardMaterial color="#ffffff" wireframe />
                 </mesh>
 
