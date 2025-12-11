@@ -30,7 +30,7 @@ export default function Interface({ selectedGod, onCloseSelection }: InterfacePr
                         Mount Olympus
                     </h1>
                     <p className="text-amber-100/70 text-sm md:text-lg italic mt-2 max-w-md font-serif">
-                        "Sing, O Muse, of the gods who hold the high peaks of snowy Olympus."
+                        The Hierarchy and Relationships of the Olympian gods
                     </p>
                 </motion.div>
 
@@ -65,7 +65,7 @@ export default function Interface({ selectedGod, onCloseSelection }: InterfacePr
                     className="text-center pb-8"
                 >
                     <p className="text-white/50 animate-pulse font-light tracking-widest text-sm uppercase">
-                        Click on a deity to reveal their mysteries
+                        Click on a deity to learn more about their relationships and myths
                     </p>
                 </motion.div>
             )}
@@ -118,17 +118,7 @@ export default function Interface({ selectedGod, onCloseSelection }: InterfacePr
                             </div>
 
                             {/* Source Quote */}
-                            <div className="border-l-2 border-amber-500/50 pl-4 py-1 italic text-gray-400 text-sm">
-                                "{selectedGod.quote}"
-                                {selectedGod.quoteSource && (
-                                    <div className="block mt-1 text-[10px] not-italic text-amber-500/60 uppercase tracking-widest text-right">
-                                        — {selectedGod.quoteSource}
-                                    </div>
-                                )}
-                                <div className="text-amber-500/80 text-xs not-italic mt-2 font-semibold">
-                                    — Primary Source: {selectedGod.primarySource}
-                                </div>
-                            </div>
+
 
 
                             {/* Relationships */}
@@ -196,19 +186,15 @@ export default function Interface({ selectedGod, onCloseSelection }: InterfacePr
 
                             <div className="prose prose-invert prose-amber max-w-none text-gray-300 space-y-4">
                                 <p>
-                                    <strong>Clarity of Purpose & Point of View:</strong><br />
-                                    This project argues that the power structure of Mount Olympus is not merely a hierarchy of strength, but a complex web of familial obligations, transactional alliances, and clearly delineated domains. By visualizing the gods as nodes in a network, we can see that no god—not even Zeus—rules in isolation.
+                                    <strong>Purpose & POV:</strong><br />
+                                    This project argues that the power structure of Mount Olympus is fascinating because it is not cut and dry, but a complex web of familial obligations, alliances, and domains. By visualizing the gods as nodes in a network, we can see that no god rules in isolation, and has a deep web of relationships and families that make the classical theistic system fascinating and complex. Unlike other more linear theistic systems, the Olympian gods are particularly interesting and full of life, story and tradition, and this project shows how complex and interconnected the gods are. There is not a simplistic family tree, or a theistic system where one god controls everything, but one where every god has a very real purpose and domain they control. Each god has a valuable spot on the mountain, and that is why they are distributed across, with their necessary positions in classical life. These relationships help shape the mythological and narrative landscape of classics, and I hope my project can help visualize that in a unique and modern way. 
                                 </p>
                                 <p>
-                                    <strong>Engagement with Mythology:</strong><br />
-                                    The visualization relies on the canonical twelve Olympians as described in Hesiod's <em>Theogony</em> and the Homeric Hymns. Particular attention has been paid to the specific epithets and domains (e.g., distinguishing Athena's strategic warfare from Ares's bloodlust).
-                                </p>
-                                <p>
-                                    <strong>Design Philosophy:</strong><br />
-                                    The aesthetic choices—dark, atmospheric, using gold and deep purples—reflect the "awesome" (in the dreadful sense) nature of the divine. The interaction design allows the user to explore these connections organically, discovering the narrative of the pantheon through their own curiosity.
+                                    <strong>Project Commentary:</strong><br />
+                                    I decided to make a web application to visualize Mt. Olympus and how its godly residents interact because I was really interested in the gods and how they have such intricate and numerous relationships with each other, as well as how Odysseus and other mortals interact with them. I remember while working on discussion posts and other assignments related to the Odyssey, I would find myself scrolling through the OEACD and the Theoi Project, reading the stories about the gods. This interest was expanded upon as I read more of the Odyssey, and I wanted to combine that with my interest in Computer Science and software development. Over the summer and this semester, I have become more familiar with web development and decided to create a Next.js project, using React frameworks and Typescript. I styled it using Tailwind CSS and Three.js for 3D objects, and stored the datasets locally. These elements, I was familiar with and wanted to both enhance my skill in them through this project, and also utilize them to create a unique and technologically neat representation of my learning this semester in CC 303. I started by just mapping the 12-13 main gods of Mt. Olympus, and slowly moved to add other characters, such as Penelope and Odysseus. I ran into some difficulties programming and developing the project, as one might with a complex project like this, but I was able to overcome them and create a project that runs smoothly and looks good, as well. I used emojis to symbolize each god or hero as well, which I thought enhanced the visualization and could give a viewer an idea of what the god’s purpose and duties are, simply from that icon. I also had challenges figuring out how to source my data, but using the Odyssey and Hesiod’s Theogony, I was able to figure out my project’s gods and relationships. In the Future, I would love to add more heroes, more gods, and more myths and stories to tie them together. This project has infinite room for expansion (at least until we run out of classic stories), and it would be really cool to continuously update and enhance the project. I think if I ever take another classics course, adding more gods and heroes that I learn about could be really cool for visualizing how their theistic relationships and families work. Overall, I learned a lot, artistically, technically, and of course in classics, and I am really excited to have this project under my belt and share my knowledge.    
                                 </p>
                                 <p className="text-sm italic text-gray-500 mt-8 border-t border-gray-800 pt-4">
-                                    Sources: Hesiod's Theogony, Homer's Iliad & Odyssey, Homeric Hymns.
+                                    Tech Stack: Next.js, React, Tailwind CSS, Framer Motion, three.js
                                 </p>
                             </div>
                         </motion.div>
@@ -249,10 +235,16 @@ export default function Interface({ selectedGod, onCloseSelection }: InterfacePr
                                     The British Museum. “Gods and Goddesses of the Greek and Roman Pantheon.” The British Museum, 7 May 2021, www.britishmuseum.org/blog/gods-and-goddesses-greek-and-roman-pantheon.
                                 </p>
                                 <p>
-                                    Homer. <em>The Odyssey</em>. Translated by Ian Johnston, Vancouver Island University Press, 2002.
+                                    Homer. <em>The Odyssey</em>. Translated by Johnston, Ian, Vancouver Island University Press, 2002.
+                                </p>
+                                <p>
+                                    Ovid. <em>Metamorphoses</em>. Translated by More, Brookes, Cornhill Publishing Co. 1922..
                                 </p>
                                 <p>
                                     Anonymous Authors. <em>Homeric Hymns</em>. Translated by Evelyn-White, H.G., Harvard University Press, 1914, https://www.theoi.com/Text/HomericHymns1.html.
+                                </p>
+                                <p className="text-sm italic text-gray-500 mt-8 border-t border-gray-800 pt-4">
+                                    Images from Open Source Unicode Emojis
                                 </p>
                             </div>
                         </motion.div>
